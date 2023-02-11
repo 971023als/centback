@@ -30,7 +30,6 @@ while read file; do
         rm -f "$file"
     fi
 done
-
  
 cat $result
 
