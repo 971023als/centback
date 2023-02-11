@@ -21,21 +21,8 @@ TMP1=`SCRIPTNAME`.log
 >$TMP1  
 
 
-
-
-# Start the named service
-named &
-
-# Confirm the named service is running
-PID=$(ps -ef | grep named | awk '{print $2}')
-if [ -z "$PID" ]; then
-  echo "The named service could not be started."
-else
-  echo "The named service has been started with PID: $PID"
-fi
-
-
-
+# Start DNS sservice
+service named start
 
 
 cat $result

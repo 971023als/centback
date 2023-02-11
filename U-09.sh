@@ -20,18 +20,9 @@ TMP1=`SCRIPTNAME`.log
 
 >$TMP1  
 
-ORIG_OWNER=$(stat -c "%U:%G" /etc/hosts)
-ORIG_PERMS=$(stat -c "%a" /etc/hosts)
+# Restore system-auth file
+cp /etc/hosts.bak /etc/hosts
 
-# Restore the original owner of the file
-sudo chown $ORIG_OWNER /etc/hosts
-
-# Restore the original permissions of the file
-sudo chmod $ORIG_PERMS /etc/hosts
-
-
-
-# 하위 파일...
 
 cat $result
 

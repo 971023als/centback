@@ -20,12 +20,8 @@ TMP1=`SCRIPTNAME`.log
 
 >$TMP1  
 
-# Restore source files
-cp /etc/pam.d/system-auth.bak /etc/pam.d/system-auth
-
-# Remove backup file
-rm /etc/pam.d/system-auth.bak
-
+# Restore system-auth file
+cp /etc/pam.d/system-auth.bak /etc/pam.d/system-auth 
 
 cat $result
 

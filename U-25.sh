@@ -32,9 +32,9 @@ ls /mnt/nfs
 # If there's an issue, print an error message and exit
 if [ $? -ne 0 ]; then
   echo "Error: NFS service could not be restored to its original state"
+else
+  echo "NFS service has been successfully restored to its original state"
 fi
-
-echo "NFS service has been successfully restored to its original state"
 
 
 

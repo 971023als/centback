@@ -5,7 +5,6 @@
 . function.sh
 
  
-
  
 
 BAR
@@ -22,20 +21,13 @@ EOF
 
 BAR
 
-
 TMP1=`SCRIPTNAME`.log
 
 > $TMP1
 
-# Check if TMOUT exists in /etc/profile
-if grep -q "TMOUT=600" /etc/profile; then
-  # Remove the line containing TMOUT from /etc/profile
-  sed -i '/TMOUT=600/d' /etc/profile
-  sed -i '/export TMOUT/d' /etc/profile
-  INFO "Removed TMOUT from /etc/profile."
-else
-  OK "TMOUT was not found in /etc/profile."
-fi
+
+# Restore backup files
+cp /etc/profile.bak /etc/profile
 
 
 

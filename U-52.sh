@@ -1,20 +1,6 @@
 #!/bin/bash
 
- 
-
 . function.sh
-
- 
-
-TMP2=$(mktemp)
-
-TMP3=$(mktemp)
-
-> $TMP2
-
-> $TMP3
-
- 
 
 BAR
 
@@ -30,34 +16,14 @@ EOF
 
 BAR
 
-
 TMP1=`SCRIPTNAME`.log
 
 > $TMP1
 
 
-# Store the original UIDs and username pairs
-TMP3=$(mktemp)
-awk -F: '{print $1 ":" $3}' "/etc/passwd" > $TMP3
+# Restore backup files
+cp /etc/passwd.bak /etc/passwd
 
-# Check if the previous script has caused any problems
-if [ "$?" -ne 0 ]; then
-  # Revert the changes made to the user accounts
-  while read -r line; do
-    USER=$(echo "$line" | cut -d: -f1)
-    UID=$(echo "$line" | cut -d: -f2)
-    sudo usermod -u "$UID" "$USER"
-  done < "$TMP3"
-  echo "Changes have been successfully rolled back."
-else
-  # Remove temporary files
-  sudo rm $TMP3
-  echo "No problems detected, temporary files have been removed."
-fi
-
-
-
- 
 
 cat $result
 

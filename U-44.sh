@@ -16,19 +16,29 @@ EOF
 
 BAR
 
-TMP1=`SCRIPTNAME`.log
+# Save Current Date and Time
+current_date_time=$(date +"%Y-%m-%d %T")
 
->$TMP1 
+# Get the backup file name
+backup_file_name=`ls /etc/passwd_* | tail -n 1`
 
+# Check if the backup file exists
+if [ -f "$backup_file_name" ]; then
+  # Restore the /etc/passwd file from the backup
+  sudo cp $backup_file_name /etc/passwd
 
-# Save original state of /etc/passwd file
-cp /etc/passwd /etc/passwd.bak
+  # Get the username of the account with the same UID as the root account
+  username=$(awk -F: '$3==0{print $1}' /etc/passwd)
 
-# Restore original state of /etc/passwd file
-cp /etc/passwd.bak /etc/passwd
-
-# Remove backup file
-rm /etc/passwd.bak
+  if [ -n "$username" ]; then
+    # Reset the UID of the account to 0
+    sudo usermod -u 0 $username
+  else
+    OK "An account with the same UID as the root account cannot be found"
+  fi
+else
+  OK "Backup file not found"
+fi
 
 
 cat $result

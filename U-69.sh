@@ -3,6 +3,7 @@
  
 
 . function.sh
+
  
 
 BAR
@@ -17,20 +18,15 @@ cat << EOF >> $result
 
 EOF
 
+
 BAR
+
 
 TMP1=`SCRIPTNAME`.log
 
-> $TMP1
+> $TMP1 
 
-
-# File Definition
-filename="/etc/exports"
-
-# Revert the changes made to the NFS access control settings file
-sudo chown root "$filename"
-sudo chmod 644 "$filename"
-
+sudo cp /etc/exports.bak /etc/exports
 
 
 cat $result

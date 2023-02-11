@@ -23,20 +23,9 @@ TMP1=`SCRIPTNAME`.log
 
 >$TMP1  
 
-
-
-# Check if TMP1 file exists
-if [ -f "$TMP1" ]; then
-  # Restore the owner and permissions of /etc/hosts.equiv
-  sudo chown `stat -c %U /etc/hosts.equiv` /etc/hosts.equiv
-  sudo chmod `stat -c %a /etc/hosts.equiv` /etc/hosts.equiv
-
-  # Restore the owner and permissions of $HOME/.rhosts
-  sudo chown `stat -c %U $HOME/.rhosts` $HOME/.rhosts
-  sudo chmod `stat -c %a $HOME/.rhosts` $HOME/.rhosts
-fi
-
-
+# Restore system-auth file
+cp /etc/hosts.equiv.bak /etc/hosts.equiv
+cp $HOME/.rhosts.bak $HOME/.rhosts
 
 
 cat $result

@@ -3,6 +3,8 @@
  
 
 . function.sh
+
+
  
 
 BAR
@@ -19,19 +21,12 @@ EOF
 
 BAR
 
- 
 TMP1=`SCRIPTNAME`.log
 
 > $TMP1
 
-
-
-sudo cp /etc/hosts.lpd.bak /etc/hosts.lpd
-sudo chown root:root /etc/hosts.lpd
-sudo chmod 600 /etc/hosts.lpd
-
-echo "The file has been restored to its original state."
-
+# Restore backup files
+cp /etc/hosts.lpd.bak /etc/hosts.lpd
 
 
 cat $result

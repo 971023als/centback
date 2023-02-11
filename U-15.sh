@@ -4,7 +4,7 @@
 
 BAR
 
-CODE [U-15] world writable 파일 점검
+CODE [U-15] world writable 파일 점검 @@ 조치 후 웹 서비스 장애  @@
 
 cat << EOF >> $result
 
@@ -20,15 +20,21 @@ TMP1=`SCRIPTNAME`.log
 
 >$TMP1  
 
+critical_dir="/path/to/system/critical/directory"
 
-if [ -f $TMP1 ]; then
-  while read line; do
-    # Restore the original permissions of the file
-    sudo chmod $line /path/to/file
-  done < $TMP1
-fi
-
-
+for file in "$critical_dir"/*; do
+  if [ ! -f "$file" ]; then
+    continue
+  fi
+  
+  permission=$(stat -c '%a' "$file")
+  if [ "$((permission & 2))" -eq 2 ]; then
+    chmod o-w "$file"
+    if [ "$((permission & 6))" -eq 6 ]; then
+      rm -rf "$file"
+    fi
+  fi
+done
 
 
 cat $result

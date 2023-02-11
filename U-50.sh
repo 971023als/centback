@@ -2,9 +2,6 @@
 
 . function.sh
 
-
- 
-
 BAR
 
 CODE [U-50] 관리자 그룹에 최소한의 계정 포함
@@ -34,6 +31,8 @@ if [ -f "/path/to/backup/etc_passwd_backup" ]; then
 else
   WARN "백업 파일을 찾을 수 없습니다. 시스템을 복원할 수 없습니다."
 fi
+
+ 
 
 cat $result
 

@@ -1,6 +1,11 @@
 #!/bin/bash
 
+ 
+
 . function.sh
+
+
+ 
 
 BAR
 
@@ -44,6 +49,7 @@ sudo useradd "$user"
 done
 
 OK "기본값이 아닌 모든 계정이 복원되었습니다."
+
 
  
 cat $result

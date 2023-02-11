@@ -22,16 +22,12 @@ BAR
 
 TMP1=`SCRIPTNAME`.log
 
-> $TMP1
+> $TMP1 
 
 
-sudo chmod 2755 /usr/bin/at
+sudo cp /usr/bin/at.bak /usr/bin/at
 
-sudo chown root:root /etc/at.deny
-
-sudo chmod 644 /etc/at.deny
-
-
+sudo cp /etc/at.deny.bak /etc/at.deny
 
 
 cat $result

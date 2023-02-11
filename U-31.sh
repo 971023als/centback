@@ -16,21 +16,12 @@ EOF
 
 BAR
 
-# Backup the original file
-cp /etc/mail/sendmail.cf /etc/mail/sendmail.cf.bak
 
-# Specify file path
-file="/etc/mail/sendmail.cf"
 
-# Specify the original line
-line="R$* $#error $@ 5.7.1 $: \"550 Relaying denied\""
 
-# Add annotations to the original line
-sed -i "s/$line/#&/" $file
-
-# Verify that the line has been restored
-grep "$line" $file
-
+# Restore backup files
+cp /etc/mail/sendmail.cf.bak /etc/mail/sendmail.cf 
+ 
 
 
 cat $result

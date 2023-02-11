@@ -18,15 +18,8 @@ EOF
 
 BAR
 
-
-ORIG_OWNER=$(stat -c "%U:%G" /etc/rsyslog.conf)
-ORIG_PERMS=$(stat -c "%a" /etc/rsyslog.conf)
-
-# Restore the original owner of the file
-sudo chown $ORIG_OWNER /etc/rsyslog.conf
-
-# Restore the original permissions of the file
-sudo chmod $ORIG_PERMS /etc/rsyslog.conf
+# Restore system-auth file
+cp xinetd.conf.bak xinetd.conf
 
 
 cat $result

@@ -20,13 +20,8 @@ TMP1=`SCRIPTNAME`.log
 
 >$TMP1  
 
-# Defining Apache Configuration Files
-file="/etc/httpd/conf/httpd.conf"
-
-# Replace "Options" with "Options FollowSymLinks"
-sed -i 's/Options/Options FollowSymLinks/g' $file
-
-
+# Confirm the restore
+INFO "35번에서 /etc/apache2/apache2.conf 백업 파일이 생성되었습니다."
 
 
 

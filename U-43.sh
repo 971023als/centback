@@ -20,19 +20,23 @@ TMP1=`SCRIPTNAME`.log
 
 >$TMP1  
 
-# Backup log files
-cp /var/log/wtmp /var/log/btmp /var/log/lastlog /var/log/xferlog ~/backup/logs/
+# Get the latest backup of the sulog file
+sulog_backup=$(ls -t /var/log/sulog_* | head -n 1)
 
-# Backup configuration files
-cp function.sh ~/backup/config/
+# Recover the sulog file from its backup
+cp $sulog_backup /var/log/sulog
 
-# If there is a problem after running the script, restore the log files and configuration files from the backup directory
-cp ~/backup/logs/* /var/log/
-cp ~/backup/config/function.sh .
+# Get the latest backup of the auth.log file
+auth_backup=$(ls -t /var/log/auth_* | head -n 1)
 
+# Recover the auth.log file from its backup
+cp $auth_backup /var/log/auth.log
 
+# Get the latest backup of the auth_logs file
+auth_logs_backup=$(ls -t /var/log/auth_logs_* | head -n 1)
 
-
+# Recover the auth_logs file from its backup
+cp $auth_logs_backup /var/log/auth_logs
 
 cat $result
 

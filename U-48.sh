@@ -24,26 +24,13 @@ EOF
 
 BAR
 
+# Get the most recent backup file
+backup_file=$(ls -t /etc/login.defs_backup* | head -n 1)
 
-# Check if the log file exists
-if [ -f $TMP1 ]; then
-  # Get the original setting from the log file
-  original_setting=$(cat $TMP1)
-  
-  # Restore the original setting
-  echo "$original_setting" > /etc/login.defs
-  
-  # Validate the restoration
-  if [ $(cat /etc/login.defs) == "$original_setting" ]; then
-    echo "System successfully restored to its original state."
-  else
-    echo "Failed to restore the system to its original state."
-  fi
-else
-  echo "Cannot find log file to restore the original state."
-fi
+# Restore the original file from the backup
+sudo cp "$backup_file" /etc/login.defs
 
- 
+INFO "Original file restored from $backup_file"
 
 cat $result
 

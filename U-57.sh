@@ -1,10 +1,6 @@
 #!/bin/bash
 
- 
-
 . function.sh
-
- 
 
 BAR
 
@@ -21,25 +17,8 @@ EOF
 BAR
 
 
-TMP1=`SCRIPTNAME`.log
-
-> $TMP1  
-
-
-
-for user in $(awk -F: '{ if ($3 >= 1000 && $3 <= 60000) print $1}' /etc/passwd); do
-  if [ -d /home/$user ]; then
-    usermod -d /$user $user
-  fi
-done
-
-echo "The home directories for user accounts have been restored to their original state."
-
-
-
-
-
-
+# Confirm the restore
+INFO "51번에서 /etc/passwd 백업 파일이 생성되었습니다.
 
 
 cat $result

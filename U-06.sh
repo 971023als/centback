@@ -4,7 +4,7 @@
 
 BAR
 
-CODE [U-06] 파일 및 디렉터리 소유자 설정
+CODE [U-06] 파일 및 디렉터리 소유자 설정 @@su 말고 sudo su 해야 함 @@
 
 cat << EOF >> $result
 
@@ -21,28 +21,23 @@ TMP1=`SCRIPTNAME`.log
 >$TMP1  
 
 
+backup_dir="./backup_nouser_nogroup"
 
-# Check if TMP1 file exists
-if [ -f "$TMP1" ]; then
-  # Read TMP1 file line by line
-  while IFS= read -r line; do
-    # Split line into an array using space as a separator
-    arr=($line)
-    # The first element of the array is the file or directory path
-    path=${arr[0]}
-    # The second element of the array is the original owner
-    owner=${arr[1]}
-    # Restore the original owner of the file or directory
-    sudo chown $owner $path
-  done < "$TMP1"
-  # Remove TMP1 file
-  rm $TMP1
+# 백업 디렉터리가 있는지 확인
+if [ -d "$backup_dir" ]; then
+  # 백업된 파일을 original location로 복사
+  for file in $(find "$backup_dir" -type f); do
+    original_file="$(echo "$file" | sed "s|$backup_dir||")"
+    cp -R "$file" "$original_file"
+  done
+
+  # 백업 디렉터리 제거
+  rm -rf "$backup_dir"
+
+  echo "Files have been recovered and backup directory has been deleted."
 else
-  # TMP1 file does not exist, display an error message
-  echo "Error: TMP1 file not found, unable to restore the original state"
+  echo "Backup directory not found. No recovery possible."
 fi
-
-
 
 cat $result
 

@@ -20,17 +20,13 @@ TMP1=`SCRIPTNAME`.log
 
 >$TMP1  
 
+# Get the most recent backup file
+backup_file=$(ls -t /etc/login.defs_backup* | head -n 1)
 
-TMP2=`SCRIPTNAME`.bak
+# Restore the original file from the backup
+sudo cp "$backup_file" /etc/login.defs
 
-# Backup the original /etc/login.defs file
-cp /etc/login.defs $TMP2
-
-# Restore the original /etc/login.defs file
-cp $TMP2 /etc/login.defs
-
-# Remove the backup file
-rm $TMP2
+INFO "Original file restored from $backup_file"
 
 
 cat $result

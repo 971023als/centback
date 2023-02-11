@@ -16,20 +16,14 @@ EOF
 
 BAR
 
-# Remove the echo file
-rm /etc/xinetd.d/echo
 
-# Remove the discard file
-rm /etc/xinetd.d/discard
+# Restore backup files
+cp /etc/xinetd.d/echo.bak /etc/xinetd.d/echo
+cp /etc/xinetd.d/discard.bak /etc/xinetd.d/discard
+cp /etc/xinetd.d/daytime.bak /etc/xinetd.d/daytime
+cp /etc/xinetd.d/chargen.bak /etc/xinetd.d/chargen
 
-# Remove the daytime file
-rm /etc/xinetd.d/daytime
 
-# Remove the chargen file
-rm /etc/xinetd.d/chargen
-
-# Restart the xinetd service
-sudo service xinetd restart
 
 
 cat $result

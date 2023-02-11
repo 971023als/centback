@@ -5,6 +5,10 @@
 . function.sh
 
 
+TMP1=`SCRIPTNAME`.log
+
+> $TMP1   
+
 BAR
 
 CODE [U-68] 로그온 시 경고 메시지 제공
@@ -21,21 +25,13 @@ BAR
 
 TMP1=`SCRIPTNAME`.log
 
-> $TMP1
+> $TMP1 
 
-
-
-# File Definitions
-files=("/etc/motd" "/etc/issue.net" "/etc/vsftpd/vsftpd.conf" "/etc/mail/sendmail.cf" "/etc/named.conf")
-
-# Revert the changes made to the logon message
-for file in "${files[@]}"; do
-  if [ -e "$file" ]; then
-    echo "" > "$file"
-  fi
-done
-
-
+sudo cp /etc/motd.bak /etc/motd
+sudo cp /etc/issue.net.bak /etc/issue.net
+sudo cp /etc/vsftpd/vsftpd.conf.bak /etc/vsftpd/vsftpd.conf
+sudo cp /etc/mail/sendmail.cf.bak /etc/mail/sendmail.cf
+sudo cp /etc/named.conf.bak /etc/named.conf
 
 
 cat $result

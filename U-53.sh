@@ -4,6 +4,7 @@
 
 . function.sh
 
+ 
 
 TMP2=/tmp/tmp1
 
@@ -31,20 +32,8 @@ TMP1=`SCRIPTNAME`.log
 > $TMP1
 
 
-# Read the original shells of the users from the log file
-while read -r line; do
-  user=$(echo "$line" | awk '{print $1}')
-  original_shell=$(echo "$line" | awk '{print $3}')
-
-  # Restore the original shell of the user
-  sudo usermod -s "$original_shell" "$user"
-  INFO "Restored user $user shell to $original_shell"
-done < "$TMP1"
-
-
-
-
- 
+# Confirm the restore
+INFO "51번에서 /etc/passwd 백업 파일이 생성되었습니다."
 
 cat $result
 

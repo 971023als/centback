@@ -1,6 +1,12 @@
 #!/bin/bash
 
+ 
+
 . function.sh
+
+ 
+
+ 
 
 BAR
 
@@ -16,25 +22,27 @@ EOF
 
 BAR
 
-TMP1=`SCRIPTNAME`.log
+# 숨김 파일 및 디렉토리 정의
+hidden_files=$(sudo find / -type f -name ".*" ! -path "/run/user/1000/gvfs/*")
+hidden_dirs=$(sudo find / -type d -name ".*" ! -path "/run/user/1000/gvfs/*")
 
-> $TMP1 
-
-# Define the location of backup files
-backup_files_dir="$HOME/hidden_files_backup"
-
-# Check if the backup directory exists
-if [ ! -d "$backup_files_dir" ]; then
-  echo "Backup directory does not exist, no files to restore"
-fi
-
-# Restore hidden files and directories
-for file in $(ls "$backup_files_dir"); do
-  cp "$backup_files_dir/$file" "$file"
+# 원치 않거나 의심스러운 파일이나 디렉토리가 있는지 확인
+for file in $hidden_files; do
+  if [[ $(basename $file) =~ "unwanted-file" ]]; then
+    echo "Found unwanted file: $file"
+     # 파일 삭제 또는 알림 전송과 같은 원하는 작업을 수행합니다.
+    sudo rm $file
+  fi
 done
 
-# Remove the backup directory
-sudo rm -rf "$backup_files_dir"
+for dir in $hidden_dirs; do
+  if [[ $(basename $dir) =~ "suspicious-dir" ]]; then
+    echo "Found suspicious directory: $dir"
+    # 디렉터리 삭제 또는 알림 전송과 같은 원하는 작업을 수행합니다.
+    sudo rm -r $dir
+  fi
+done
+
 
 
 cat $result

@@ -20,15 +20,8 @@ TMP1=`SCRIPTNAME`.log
 
 >$TMP1  
 
-
-# Replace [Apache_home], [username], and [groupname] with appropriate original values
-APACHE_CONF_FILE=/etc/httpd/conf/httpd.conf
-USERNAME=root
-GROUPNAME=root
-
-# Replace user and group rows with original values
-sed -i "s/User.*/User $USERNAME/g" $APACHE_CONF_FILE
-sed -i "s/Group.*/Group $GROUPNAME/g" $APACHE_CONF_FILE
+# Confirm the restore
+INFO "35번에서 /etc/apache2/apache2.conf 백업 파일이 생성되었습니다."
 
 
 cat $result

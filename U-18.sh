@@ -20,18 +20,12 @@ TMP1=`SCRIPTNAME`.log
 
 >$TMP1  
 
+# Restore backup files
+mv /etc/hosts.allow.bak /etc/hosts.allow
+mv /etc/hosts.deny.bak /etc/hosts.deny
 
-# Check if TMP1 file exists
-if [ -f "$TMP1" ]; then
-  # Remove the line with 192.168.0.1 from /etc/hosts.allow
-  sudo sed -i '/192.168.0.1/d' /etc/hosts.allow
-
-  # Remove the line with "ALL" from /etc/hosts.deny
-  sudo sed -i '/ALL/d' /etc/hosts.deny
-fi
-
-
-
+# Confirm the restore
+INFO "백업 파일이 복원되었습니다."
 
 cat $result
 

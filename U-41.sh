@@ -1,10 +1,18 @@
 #!/bin/bash
 
+ 
+
 . function.sh
+
+ 
+TMP1=`SCRIPTNAME`.log
+
+> $TMP1 
+ 
 
 BAR
 
-CODE [U-41] 웹서비스 영역의 분리
+CODE [U-41] Apache 웹 서비스 영역의 분리 
 
 cat << EOF >> $result
 
@@ -16,16 +24,19 @@ EOF
 
 BAR
 
-TMP1=`SCRIPTNAME`.log
+# Restore backup files
+cp /etc/apache2/sites-available/000-default.conf.bak /etc/apache2/sites-available/000-default.conf
 
->$TMP1  
+# 확인할 Apache2 Document Root 디렉토리 설정
+config_file="/etc/apache2/sites-available/000-default.conf"
 
 
-# Defining Apache Configuration Files
-file="/etc/httpd/conf/httpd.conf"
-
-# Replace DocumentRoot value with the original path
-sed -i 's#DocumentRoot /home/centos/newphp/#DocumentRoot /var/www/html#g' $file
+# DocumentRoot가 기본 경로로 설정되어 있는지 확인합니다
+if [ "$config_file" = "/var/www/html" ] ; then
+  WARN "DocumentRoot가 기본 경로로 설정되었습니다: /var/www/html"
+else
+  OK "DocumentRoot가 기본 경로로 설정되지 않았습니다. $config_file"
+fi
 
 
 cat $result

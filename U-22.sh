@@ -20,36 +20,16 @@ TMP1=`SCRIPTNAME`.log
 
 >$TMP1  
 
-
-#!/bin/bash
-
-sudo chown root:root /etc/crontab
-sudo chmod 644 /etc/crontab
-
-sudo chown root:root /etc/cron.hourly
-sudo chmod 755 /etc/cron.hourly
-
-sudo chown root:root /etc/cron.daily
-sudo chmod 755 /etc/cron.daily
-
-sudo chown root:root /etc/cron.weekly
-sudo chmod 755 /etc/cron.weekly
-
-sudo chown root:root /etc/cron.monthly
-sudo chmod 755 /etc/cron.monthly
-
-sudo chown root:root /etc/cron.allow
-sudo chmod 644 /etc/cron.allow
-
-sudo chown root:root /etc/cron.deny
-sudo chmod 644 /etc/cron.deny
-
-sudo chown root:root /var/spool/cron*
-sudo chmod 755 /var/spool/cron*
-
-sudo chown root:root /var/spool/cron/crontabs/
-sudo chmod 755 /var/spool/cron/crontabs/
-
+# Restore backup files
+cp /etc/crontab.bak /etc/crontab
+cp /etc/cron.hourly.bak /etc/cron.hourly
+cp /etc/cron.daily.bak /etc/cron.daily
+cp /etc/cron.weekly.bak /etc/cron.weekly
+cp /etc/cron.monthly.bak /etc/cron.monthly
+cp /etc/cron.allow.bak /etc/cron.allow
+cp /etc/cron.deny.bak /etc/cron.deny
+cp /var/spool/cron/*.bak /var/spool/cron/*
+#cp /var/spool/cron/crontabs/*.bak /var/spool/cron/crontabs/*
 
 cat $result
 

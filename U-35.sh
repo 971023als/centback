@@ -21,14 +21,9 @@ TMP1=`SCRIPTNAME`.log
 >$TMP1  
 
 
-# Defining Apache Configuration Files
-file="/etc/httpd/conf/httpd.conf"
 
-# Replace "Options" with "Options Indexes"
-sudo sed -i 's/Options/Options Indexes/g' $file
-
-
-
+# Restore backup files
+cp /etc/apache2/apache2.conf.bak /etc/apache2/apache2.conf
 
 
 

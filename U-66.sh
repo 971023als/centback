@@ -19,16 +19,12 @@ EOF
 
 BAR
 
-TMP1=`SCRIPTNAME`.log
 
-> $TMP1
+# Restore the snmpd configuration file
+sudo cp /etc/snmp/snmpd.conf.bak /etc/snmp/snmpd.conf
 
-
-
-# Start SNMP service
+# Start the snmpd service
 sudo service snmpd start
-OK "Started SNMP service"
-
 
 cat $result
 
