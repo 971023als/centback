@@ -20,8 +20,8 @@ TMP1=`SCRIPTNAME`.log
 
 >$TMP1  
 
-#    백업 파일 생성
-INFO "35번에서 /etc/apache2/apache2.conf 백업 파일이 생성되었습니다."
+#  백업 파일 생성
+INFO "35번에서 /etc/httpd/conf/httpd.conf 백업 파일이 생성되었습니다."
 
 
 

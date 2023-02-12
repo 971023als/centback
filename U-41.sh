@@ -24,19 +24,9 @@ EOF
 
 BAR
 
-#    백업 파일 생성
-cp /etc/apache2/sites-available/000-default.conf.bak /etc/apache2/sites-available/000-default.conf
 
-# 확인할 Apache2 Document Root 디렉토리 설정
-config_file="/etc/apache2/sites-available/000-default.conf"
-
-
-# DocumentRoot가 기본 경로로 설정되어 있는지 확인합니다
-if [ "$config_file" = "/var/www/html" ] ; then
-  WARN "DocumentRoot가 기본 경로로 설정되었습니다: /var/www/html"
-else
-  OK "DocumentRoot가 기본 경로로 설정되지 않았습니다. $config_file"
-fi
+#  백업 파일 생성
+INFO "35번에서 /etc/httpd/conf/httpd.conf 백업 파일이 생성되었습니다."
 
 
 cat $result
