@@ -27,7 +27,6 @@ BAR
 #  백업 파일 생성
 INFO "35번에서 /etc/httpd/conf/httpd.conf 백업 파일이 생성되었습니다."
 
-
 cat $result
 
 echo ; echo

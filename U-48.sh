@@ -8,8 +8,6 @@ TMP1=`SCRIPTNAME`.log
 
 > $TMP1
 
- 
-
 BAR
 
 CODE [U-48] 패스워드 최소 사용기간 설정

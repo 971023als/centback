@@ -25,7 +25,6 @@ INFO "35번에서 /etc/httpd/conf/httpd.conf 백업 파일이 생성되었습니
 
 
 
-
 cat $result
 
 echo ; echo
