@@ -24,7 +24,6 @@ TMP1=`SCRIPTNAME`.log
 #    백업 파일 생성
 cp /etc/group.bak /etc/group
 
-
 cat $result
 
 echo ; echo
