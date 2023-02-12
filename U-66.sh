@@ -1,9 +1,6 @@
 #!/bin/bash
 
- 
-
 . function.sh
-   
 
 BAR
 
@@ -19,9 +16,8 @@ EOF
 
 BAR
 
-
 #  백업 파일 생성
-INFO "66번에서 백업 파일이 생성되었습니다."
+cp /etc/snmp/snmpd.conf.bak /etc/snmp/snmpd.conf
 
 cat $result
 
